@@ -110,7 +110,7 @@
     <nav class="navbar navbar-expand-lg custom-navbar" id="navabr">
         <!-- Logo on the left -->
         <a class="navbar-brand" href="#">
-            <img src="assets/logo/ConstructionXpert__1_-removebg-preview_3.png" alt="Logo">
+            <img src="assets/logo/ConstructionXpert__1_-removebg-preview_3.PNG" alt="Logo">
         </a>
 
         <!-- Hamburger menu for mobile -->
@@ -131,7 +131,7 @@
                 </li>
                 <!-- Se Connecter -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Se Connecter</a>
+                    <a class="nav-link" href="/login">Se Connecter</a>
                 </li>
             </ul>
         </div>
