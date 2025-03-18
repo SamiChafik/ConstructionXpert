@@ -1,4 +1,4 @@
-package com.example.constructionxpert.servlet;
+package com.example.constructionxpert.authentification;
 
 import com.example.constructionxpert.DAO.Table;
 import com.example.constructionxpert.DAO.UserDAO;
