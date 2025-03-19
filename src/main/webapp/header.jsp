@@ -52,7 +52,7 @@
         </div>
 
         <a class="navbar-brand" href="#">
-            Bienvenue, <%= name %>
+<%--            Bienvenue, <%= ((User) session.getAttribute("user")).getName() %>--%>
         </a>
     </div>
 
