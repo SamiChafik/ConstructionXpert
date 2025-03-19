@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/project")
 public class ProjectServlet extends HttpServlet {
@@ -31,6 +32,13 @@ public class ProjectServlet extends HttpServlet {
             case "add":
                 addProject(request, response);
                 break;
+            case "list":
+                listProject(request, response);
+                break;
+            case "delete":
+                deleteProject(request, response);
+                break;
+
         }
     }
 
@@ -64,7 +72,30 @@ public class ProjectServlet extends HttpServlet {
 
         projectDAO.addProject(project);
 
-        response.sendRedirect("/project?action=listproject");
+        response.sendRedirect("/project?action=list");
     }
+
+    private void listProject(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        ProjectDAO projectDAO = new ProjectDAO();
+        List<Project> projects = projectDAO.getAllProjects();
+
+        request.setAttribute("projects", projects);
+
+        request.getRequestDispatcher("listProjects.jsp").forward(request, response);
+    }
+
+    private void deleteProject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int projectId = Integer.parseInt(request.getParameter("projectId"));
+
+        ProjectDAO projectDAO = new ProjectDAO();
+        boolean isDeleted = projectDAO.deleteProject(projectId);
+
+        if (isDeleted) {
+            response.sendRedirect("/project?action=list");
+        } else {
+            response.sendRedirect("viewProjects?error=delete_failed");
+        }
+    }
+
 }
 
