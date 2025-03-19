@@ -37,6 +37,15 @@ public class RessourceServlet extends HttpServlet {
             case "list":
                 listRessources(request, response);
                 break;
+            case "editform":
+                showEditForm(request, response);
+                break;
+            case "edit":
+                updateRessource(request, response);
+                break;
+            case "delete":
+                deleteRessource(request, response);
+                break;
 
         }
     }
@@ -63,7 +72,7 @@ public class RessourceServlet extends HttpServlet {
 
         ressourceDAO.addRessource(ressource);
 
-        response.sendRedirect("/ressource?action=lsit");
+        response.sendRedirect("/ressource?action=list");
     }
 
     private void listRessources(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -73,5 +82,46 @@ public class RessourceServlet extends HttpServlet {
         request.setAttribute("ressources", ressource);
 
         request.getRequestDispatcher("listRessource.jsp").forward(request, response);
+    }
+
+    private void deleteRessource(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int ressourceId = Integer.parseInt(request.getParameter("ressourceId"));
+
+        RessourceDAO ressourceDAO = new RessourceDAO();
+        boolean isDeleted = ressourceDAO.deleteRessource(ressourceId);
+
+        if (isDeleted) {
+            response.sendRedirect("/ressource?action=list");
+        } else {
+            response.sendRedirect("viewProjects?error=delete_failed");
+        }
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int ressourceId = Integer.parseInt(request.getParameter("ressourceId"));
+        Ressource ressource = ressourceDAO.getRessourceById(ressourceId);
+
+        request.setAttribute("ressource_id", ressource.getRessource_id());
+        request.setAttribute("name", ressource.getName());
+        request.setAttribute("type", ressource.getType());
+        request.setAttribute("quantity", ressource.getQuantity());
+        request.setAttribute("supplier", ressource.getSupplier());
+
+        request.getRequestDispatcher("editRessource.jsp").forward(request, response);
+    }
+
+    private void updateRessource(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int ressourceId = Integer.parseInt(request.getParameter("ressource_id"));
+        String name = request.getParameter("name");
+        String type = request.getParameter("type");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        String supplier = request.getParameter("supplier");
+
+        Ressource ressource = new Ressource(ressourceId, name, type, quantity, supplier);
+        ressourceDAO.updateRessource(ressource);
+
+        response.sendRedirect("/ressource?action=list");
     }
 }
