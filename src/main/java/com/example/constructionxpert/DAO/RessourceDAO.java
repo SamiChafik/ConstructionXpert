@@ -3,10 +3,9 @@ package com.example.constructionxpert.DAO;
 import com.example.constructionxpert.model.Project;
 import com.example.constructionxpert.model.Ressource;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RessourceDAO {
     DatabaseConnection dbConnection = new DatabaseConnection();
@@ -24,5 +23,32 @@ public class RessourceDAO {
         } catch (SQLException e) {
             System.err.println("SQL Error: " + e.getMessage());
         }
+    }
+
+    public List<Ressource> getAllRessources() {
+        List<Ressource> ressources = new ArrayList<>();
+        String sql = "SELECT * FROM ressource";
+
+        try (Connection connection = dbConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Ressource ressource = new Ressource();
+
+                ressource.setRessource_id(resultSet.getInt("ressource_id"));
+                ressource.setName(resultSet.getString("name"));
+                ressource.setType(resultSet.getString("type"));
+                ressource.setQuantity(resultSet.getInt("quantity"));
+                ressource.setSupplier(resultSet.getString("supplier"));
+
+                ressources.add(ressource);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return ressources;
     }
 }

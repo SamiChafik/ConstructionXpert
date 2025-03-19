@@ -1,6 +1,8 @@
 package com.example.constructionxpert.controllers;
 
+import com.example.constructionxpert.DAO.ProjectDAO;
 import com.example.constructionxpert.DAO.RessourceDAO;
+import com.example.constructionxpert.model.Project;
 import com.example.constructionxpert.model.Ressource;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/ressource")
 public class RessourceServlet extends HttpServlet {
@@ -31,6 +34,10 @@ public class RessourceServlet extends HttpServlet {
             case "add":
                 addRessource(request, response);
                 break;
+            case "list":
+                listRessources(request, response);
+                break;
+
         }
     }
 
@@ -41,7 +48,7 @@ public class RessourceServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void addRessource(HttpServletRequest request, HttpServletResponse response) {
+    private void addRessource(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String type = request.getParameter("type");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -56,6 +63,15 @@ public class RessourceServlet extends HttpServlet {
 
         ressourceDAO.addRessource(ressource);
 
+        response.sendRedirect("/ressource?action=lsit");
+    }
 
+    private void listRessources(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        RessourceDAO ressourceDAO = new RessourceDAO();
+        List<Ressource> ressource = ressourceDAO.getAllRessources();
+
+        request.setAttribute("ressources", ressource);
+
+        request.getRequestDispatcher("listRessource.jsp").forward(request, response);
     }
 }
