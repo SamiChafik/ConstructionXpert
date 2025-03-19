@@ -89,7 +89,7 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Ressource ID</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Type</th>
                 <th>Quantity</th>
@@ -111,9 +111,13 @@
                 <td><%= ressource.getSupplier() %></td>
                 <td>
                     <!-- Edit Project Button -->
-                    <a href="ressource?...=<%= ressource.getRessource_id() %>" class="btn btn-custom btn-sm">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
+<%--                    <a href="ressource?...=<%= ressource.getRessource_id() %>" class="btn btn-custom btn-sm">--%>
+<%--                        <i class="fas fa-edit"></i> Edit--%>
+<%--                    </a>--%>
+                    <form action="/ressource?action=editform" method="post">
+                        <input type="hidden" name="ressourceId" value="<%= ressource.getRessource_id() %>">
+                        <button type="submit" class="btn btn-warning">Modifier</button>
+                    </form>
                     <!-- Delete Project Button -->
                     <%--                    <a href="project?action=delete?projectId=<%= project.getProject_id() %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this project?');">--%>
                     <%--                        <i class="fas fa-trash"></i> Delete--%>
