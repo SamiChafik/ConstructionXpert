@@ -5,6 +5,7 @@
     User user = (User) session.getAttribute("user");
     String name = user != null ? user.getName() : "";
 %>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <style>
     .sidebar {
         height: 100vh;
@@ -59,6 +60,7 @@
     <a href="/accueil.jsp"><i class="fas fa-home"></i> Home</a>
     <a href="/project?action=new"><i class="fas fa-plus"></i> Add Project</a>
     <a href="/project?action=list"><i class="fas fa-list"></i> View Projects</a>
+    <a href="/ressource?action=new"><i class="fas fa-plus"></i> Add Resource</a>
     <a href="#"><i class="fas fa-users"></i> Manage Resources</a>
     <a href="#"><i class="fas fa-cog"></i> Settings</a>
     <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
