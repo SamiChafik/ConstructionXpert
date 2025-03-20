@@ -60,6 +60,7 @@
     <a href="/accueil.jsp"><i class="fas fa-home"></i> Home</a>
     <a href="/project?action=new"><i class="fas fa-plus"></i> Add Project</a>
     <a href="/project?action=list"><i class="fas fa-list"></i> View Projects</a>
+    <a href="/task?action=list"><i class="fas fa-list"></i> List of Tasks</a>
     <a href="/ressource?action=new"><i class="fas fa-plus"></i> Add Resource</a>
     <a href="/ressource?action=list"><i class="fas fa-list"></i> View Resources</a>
     <a href="#"><i class="fas fa-cog"></i> Settings</a>
