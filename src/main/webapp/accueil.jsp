@@ -127,7 +127,7 @@
                 </li>
                 <!-- Les Ressources -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Les Ressources</a>
+                    <a class="nav-link" href="/ressource?action=list">Les Ressources</a>
                 </li>
                 <!-- Se Connecter -->
                 <li class="nav-item">
