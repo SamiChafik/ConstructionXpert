@@ -40,15 +40,23 @@ public class TaskDAO {
 
     public void addTaskRessource(int taskId, int ressourceId, int quantity) {
         String sql = "INSERT INTO tache_ressource (tache_id, ressource_id, quantity) VALUES (?, ?, ?)";
+        String updateSql = "UPDATE ressource SET quantity = quantity - ? WHERE ressource_id = ?";
 
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement insertStatement = connection.prepareStatement(sql);
+             PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
 
-            preparedStatement.setInt(1, taskId);
-            preparedStatement.setInt(2, ressourceId);
-            preparedStatement.setInt(3, quantity);
+            insertStatement.setInt(1, taskId);
+            insertStatement.setInt(2, ressourceId);
+            insertStatement.setInt(3, quantity);
 
-            preparedStatement.executeUpdate();
+            insertStatement.executeUpdate();
+
+            updateStatement.setInt(1, quantity);
+            updateStatement.setInt(2, ressourceId);
+
+            updateStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
