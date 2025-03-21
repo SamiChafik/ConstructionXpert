@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.constructionxpert.model.Ressource" %>
 <%@ page import="java.util.List" %>
 <html>
 <head>
@@ -99,27 +98,6 @@
             <div class="form-group">
                 <label for="finish_date">Finish Date:</label>
                 <input type="date" id="finish_date" name="finish_date" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label>Select Resources:</label>
-                <div class="checkbox-group">
-                    <%
-                        List<Ressource> ressources = (List<Ressource>) request.getAttribute("ressources");
-                        if (ressources != null) {
-                            for (Ressource ressource : ressources) {
-                    %>
-                    <div class="form-check">
-                        <input class="form-check-input input-check" type="checkbox" name="ressource_ids" value="<%= ressource.getRessource_id() %>" id="ressource_<%= ressource.getRessource_id() %>">
-                        <label class="form-check-label" for="ressource_<%= ressource.getRessource_id() %>">
-                            <%= ressource.getName() %> (<%= ressource.getType() %>)
-                        </label>
-                    </div>
-                    <%
-                            }
-                        }
-                    %>
-                </div>
             </div>
 
             <button type="submit" class="btn btn-custom btn-block">Add Task</button>
