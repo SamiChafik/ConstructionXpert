@@ -47,6 +47,7 @@ public class Table {
                     "tache_ressource_id INT PRIMARY KEY AUTO_INCREMENT, " +
                     "tache_id INT NOT NULL, " +
                     "ressource_id INT NOT NULL, " +
+                    "quantity INT NOT NULL," +
                     "FOREIGN KEY (tache_id) REFERENCES tache(tache_id) ON DELETE CASCADE, " +
                     "FOREIGN KEY (ressource_id) REFERENCES ressource(ressource_id) ON DELETE CASCADE" +
                     ")";
