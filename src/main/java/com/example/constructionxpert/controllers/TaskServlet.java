@@ -34,16 +34,24 @@ public class TaskServlet extends HttpServlet {
            case "add":
                addTask(request,response);
                break;
+           case "list":
+               listTasks(request,response);
+               break;
+           case "addressourceforn":
+               showResourceToTaskForm(request, response);
+               break;
+           case "addressourcetotask":
+               addResourceToTask(request, response);
+               break;
 
        }
     }
 
+
+
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int projectId = Integer.parseInt(request.getParameter("projectId"));
-
-        List<Ressource> ressources = ressourceDAO.getAllRessources();
-        request.setAttribute("ressources", ressources);
 
         request.setAttribute("projectId", projectId);
 
@@ -57,7 +65,6 @@ public class TaskServlet extends HttpServlet {
         String description = request.getParameter("description");
         String startDate = request.getParameter("start_date");
         String finishDate = request.getParameter("finish_date");
-        String[] ressourceIds = request.getParameterValues("ressource_ids");
 
         Task task = new Task();
         task.setProject_id(projectId);
@@ -68,13 +75,38 @@ public class TaskServlet extends HttpServlet {
 
         taskDAO.addTask(task);
 
-        if (ressourceIds != null) {
-            for (String ressourceId : ressourceIds) {
-                taskDAO.addTaskRessource(task.getTask_id(), Integer.parseInt(ressourceId));
-            }
-        }
-
         response.sendRedirect("project?action=list");
+    }
+
+    private void listTasks(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Task> tasks = taskDAO.getAllTasks();
+
+        request.setAttribute("tasks", tasks);
+
+        request.getRequestDispatcher("listTasks.jsp").forward(request, response);
+    }
+
+    private void showResourceToTaskForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int taskId = Integer.parseInt(request.getParameter("taskId"));
+
+        List<Ressource> ressources = ressourceDAO.getAllRessources();
+
+        request.setAttribute("taskId", taskId);
+        request.setAttribute("ressources", ressources);
+
+        request.getRequestDispatcher("addResourceToTask.jsp").forward(request, response);
+    }
+
+    private void addResourceToTask(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int taskId = Integer.parseInt(request.getParameter("taskId"));
+        int ressourceId = Integer.parseInt(request.getParameter("resourceId"));
+        int quantity = Integer.parseInt(request.getParameter("resourceQuantity"));
+
+        taskDAO.addTaskRessource(taskId, ressourceId, quantity);
+
+        response.sendRedirect("task?action=list");
     }
 
 }
