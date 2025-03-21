@@ -55,7 +55,10 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-custom btn-block">Login</button>
+        <div class="buttons-container">
+            <button type="submit" class="btn btn-custom btn-block">Login</button>
+            <button href="accueil.jsp" class="btn btn-custom btn-block">Accueil</button>
+        </div>
     </form>
 
     <% if (request.getParameter("error") != null) { %>
