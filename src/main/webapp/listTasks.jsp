@@ -127,7 +127,7 @@
 
                     <form action="/task?action=addressourceforn" method="post">
                         <input type="hidden" name="taskId" value="<%= task.getTask_id() %>">
-                        <button type="submit" class="btn btn-primary">Add task</button>
+                        <button type="submit" class="btn btn-primary">Add Ressource</button>
                     </form>
                     <!-- Edit Task Button -->
                     <form action="/task?action=editform" method="post">
