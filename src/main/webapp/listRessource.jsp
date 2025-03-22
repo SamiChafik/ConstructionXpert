@@ -77,6 +77,11 @@
         section {
             width: 100%;
         }
+
+        #options {
+            display: flex;
+            gap: 2px;
+        }
     </style>
 </head>
 <body>
@@ -109,14 +114,14 @@
                 <td><%= ressource.getType() %></td>
                 <td><%= ressource.getQuantity() %></td>
                 <td><%= ressource.getSupplier() %></td>
-                <td>
+                <td id="options">
                     <!-- Edit Project Button -->
 <%--                    <a href="ressource?...=<%= ressource.getRessource_id() %>" class="btn btn-custom btn-sm">--%>
 <%--                        <i class="fas fa-edit"></i> Edit--%>
 <%--                    </a>--%>
                     <form action="/ressource?action=editform" method="post">
                         <input type="hidden" name="ressourceId" value="<%= ressource.getRessource_id() %>">
-                        <button type="submit" class="btn btn-warning">Modifier</button>
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></button>
                     </form>
                     <!-- Delete Project Button -->
                     <%--                    <a href="project?action=delete?projectId=<%= project.getProject_id() %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this project?');">--%>
@@ -124,7 +129,7 @@
                     <%--                    </a>--%>
                     <form action="/ressource?action=delete" method="post" onsubmit="return confirm('Are you sure you want to delete this ressource?');">
                         <input type="hidden" name="ressourceId" value="<%= ressource.getRessource_id() %>">
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>

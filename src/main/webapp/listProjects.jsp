@@ -76,6 +76,11 @@
         section {
             width: 100%;
         }
+
+        #options {
+            display: flex;
+            gap: 2px;
+        }
     </style>
 </head>
 <body>
@@ -110,14 +115,14 @@
                 <td><%= project.getStart_date() %></td>
                 <td><%= project.getFinish_date() %></td>
                 <td><%= project.getBudget() %></td>
-                <td>
+                <td id="options">
                     <!-- Add Task Button -->
 <%--                    <a href="addTask.jsp?projectId=<%= project.getProject_id() %>" class="btn btn-custom btn-sm">--%>
 <%--                        <i class="fas fa-plus"></i> Add Task--%>
 <%--                    </a>--%>
                     <form action="/task?action=new" method="post">
                         <input type="hidden" name="projectId" value="<%= project.getProject_id() %>">
-                        <button type="submit" class="btn btn-primary">Add Task</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-thumbtack"></i></button>
                     </form>
                     <!-- Edit Project Button -->
 <%--                    <a href="editProject.jsp?projectId=<%= project.getProject_id() %>" class="btn btn-custom btn-sm">--%>
@@ -125,7 +130,7 @@
 <%--                    </a>--%>
                     <form action="/project?action=editform" method="post">
                         <input type="hidden" name="projectId" value="<%= project.getProject_id() %>">
-                        <button type="submit" class="btn btn-warning">Modifier</button>
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></button>
                     </form>
                     <!-- Delete Project Button -->
 <%--                    <a href="project?action=delete?projectId=<%= project.getProject_id() %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this project?');">--%>
@@ -133,7 +138,7 @@
 <%--                    </a>--%>
                     <form action="/project?action=delete" method="post" onsubmit="return confirm('Are you sure you want to delete this project?');">
                         <input type="hidden" name="projectId" value="<%= project.getProject_id() %>">
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>

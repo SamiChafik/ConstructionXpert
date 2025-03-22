@@ -71,6 +71,15 @@
         section {
             width: 100%;
         }
+
+        #options {
+            display: flex;
+            gap: 2px;
+        }
+
+        .ressourceBtn {
+            font-size: 11px;
+        }
     </style>
 </head>
 <body>
@@ -123,21 +132,21 @@
                         }
                     %>
                 </td>
-                <td>
+                <td id="options">
 
                     <form action="/task?action=addressourceforn" method="post">
                         <input type="hidden" name="taskId" value="<%= task.getTask_id() %>">
-                        <button type="submit" class="btn btn-primary">Add Ressource</button>
+                        <button type="submit" class="btn btn-primary ressourceBtn"><i class="fas fa-object-group fa-lg"></i> Ressource</button>
                     </form>
                     <!-- Edit Task Button -->
                     <form action="/task?action=editform" method="post">
                         <input type="hidden" name="taskId" value="<%= task.getTask_id() %>">
-                        <button type="submit" class="btn btn-warning">Edit</button>
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></button>
                     </form>
                     <!-- Delete Task Button -->
                     <form action="/task?action=delete" method="post" onsubmit="return confirm('Are you sure you want to delete this task?');">
                         <input type="hidden" name="taskId" value="<%= task.getTask_id() %>">
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>
