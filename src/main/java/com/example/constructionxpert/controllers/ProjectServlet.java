@@ -3,7 +3,6 @@ package com.example.constructionxpert.controllers;
 import com.example.constructionxpert.DAO.ProjectDAO;
 import com.example.constructionxpert.model.Project;
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,6 +36,12 @@ public class ProjectServlet extends HttpServlet {
                 break;
             case "delete":
                 deleteProject(request, response);
+                break;
+            case "editform":
+                showEditForm(request, response);
+                break;
+            case "edit":
+                updateProject(request, response);
                 break;
 
         }
@@ -97,5 +102,42 @@ public class ProjectServlet extends HttpServlet {
         }
     }
 
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int projectId = Integer.parseInt(request.getParameter("projectId"));
+        Project project = projectDAO.getProjectById(projectId);
+
+        request.setAttribute("project_id", project.getProject_id());
+        request.setAttribute("name", project.getName());
+        request.setAttribute("description", project.getDescription());
+        request.setAttribute("start_date", project.getStart_date());
+        request.setAttribute("finish_date", project.getFinish_date());
+        request.setAttribute("budget", project.getBudget());
+
+        request.getRequestDispatcher("editProject.jsp").forward(request, response);
+    }
+
+    private void updateProject(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int projectId = Integer.parseInt(request.getParameter("projectId"));
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        String start_date = request.getParameter("start_date");
+        String finish_date = request.getParameter("finish_date");
+        String budgetStr = request.getParameter("budget");
+
+        double budget = 0.0;
+        try {
+            budget = Double.parseDouble(budgetStr);
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid budget value: " + budgetStr);
+            e.printStackTrace();
+        }
+
+        Project project = new Project(projectId, name, description, start_date, finish_date, budget);
+        projectDAO.updateProject(project);
+
+        response.sendRedirect("/project?action=list");
+    }
 }
 
