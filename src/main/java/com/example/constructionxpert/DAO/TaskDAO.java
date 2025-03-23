@@ -127,4 +127,21 @@ public class TaskDAO {
         return tasks;
     }
 
+    public boolean deleteTask(int taskId) {
+        String sql = "DELETE FROM tache WHERE tache_id = ?";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, taskId);
+            int rowsDeleted = statement.executeUpdate();
+            return rowsDeleted > 0;
+
+        } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

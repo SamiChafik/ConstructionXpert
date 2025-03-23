@@ -1,5 +1,6 @@
 package com.example.constructionxpert.controllers;
 
+import com.example.constructionxpert.DAO.ProjectDAO;
 import com.example.constructionxpert.DAO.RessourceDAO;
 import com.example.constructionxpert.DAO.TaskDAO;
 import com.example.constructionxpert.model.Ressource;
@@ -42,6 +43,9 @@ public class TaskServlet extends HttpServlet {
                break;
            case "addressourcetotask":
                addResourceToTask(request, response);
+               break;
+           case "delete":
+               deleteTask(request, response);
                break;
 
        }
@@ -107,6 +111,19 @@ public class TaskServlet extends HttpServlet {
         taskDAO.addTaskRessource(taskId, ressourceId, quantity);
 
         response.sendRedirect("task?action=list");
+    }
+
+    private void deleteTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int taskId = Integer.parseInt(request.getParameter("taskId"));
+
+        TaskDAO taskDAO = new TaskDAO();
+        boolean isDeleted = taskDAO.deleteTask(taskId);
+
+        if (isDeleted) {
+            response.sendRedirect("/task?action=list");
+        } else {
+            response.sendRedirect("viewTask?error=delete_failed");
+        }
     }
 
 }
