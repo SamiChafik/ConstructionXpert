@@ -9,7 +9,6 @@
     <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-
         body {
             background: url('assets/images/7014634.jpg') no-repeat center center fixed;
             background-size: cover;
@@ -17,10 +16,7 @@
             padding: 0;
             height: 90vh;
             flex-direction: row;
-            /*align-items: center;*/
-            /*justify-content: center;*/
         }
-
 
         .blurry-box {
             background: rgba(42, 42, 42, 0.4);
@@ -34,26 +30,42 @@
             margin: 20px auto;
         }
 
-        .sectionTable{
+        .sectionTable {
             display: flex;
-            /*align-items: center;*/
             justify-content: center;
             width: 82%;
             margin-left: 250px;
             height: auto;
         }
 
-        .table {
-            color: white;
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Deux colonnes par ligne */
+            gap: 20px; /* Espace entre les boîtes */
         }
 
-        .table thead th {
-            background-color: #5AE4A7;
-            color: #000;
+        .project-box {
+            background: rgba(67, 67, 67, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #343a40;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
         }
 
-        .table tbody td {
-            color: white;
+        .project-box:hover {
+            transform: scale(1.01);
+        }
+
+        .project-box h3 {
+            margin-top: 0;
+            color: #5AE4A7;
+        }
+
+        .project-box p {
+            margin: 5px 0;
         }
 
         .btn-custom {
@@ -67,19 +79,20 @@
             background-color: #4acf97;
         }
 
-
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        section {
-            width: 100%;
-        }
-
         #options {
             display: flex;
-            gap: 2px;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-warning, .btn-danger {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -90,64 +103,42 @@
 <section class="sectionTable">
     <div class="blurry-box">
         <h1 class="text-center mb-4">Projects List</h1>
-        <table class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th>Project ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>Finish Date</th>
-                <th>Budget</th>
-                <th>Options</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="project-grid">
             <%
                 List<Project> projects = (List<Project>) request.getAttribute("projects");
                 if (projects != null) {
                     for (Project project : projects) {
             %>
-            <tr>
-                <td><%= project.getProject_id() %></td>
-                <td><%= project.getName() %></td>
-                <td><%= project.getDescription() %></td>
-                <td><%= project.getStart_date() %></td>
-                <td><%= project.getFinish_date() %></td>
-                <td><%= project.getBudget() %></td>
-                <td id="options">
+            <div class="project-box">
+                <h3><%= project.getName() %></h3>
+                <p><strong>ID:</strong> <%= project.getProject_id() %></p>
+                <p><strong>Description:</strong> <%= project.getDescription() %></p>
+                <p><strong>Start Date:</strong> <%= project.getStart_date() %></p>
+                <p><strong>Finish Date:</strong> <%= project.getFinish_date() %></p>
+                <p><strong>Budget:</strong> <%= project.getBudget() %></p>
+                <div id="options">
                     <!-- Add Task Button -->
-<%--                    <a href="addTask.jsp?projectId=<%= project.getProject_id() %>" class="btn btn-custom btn-sm">--%>
-<%--                        <i class="fas fa-plus"></i> Add Task--%>
-<%--                    </a>--%>
                     <form action="/task?action=new" method="post">
                         <input type="hidden" name="projectId" value="<%= project.getProject_id() %>">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-thumbtack"></i></button>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-thumbtack"></i></button>
                     </form>
                     <!-- Edit Project Button -->
-<%--                    <a href="editProject.jsp?projectId=<%= project.getProject_id() %>" class="btn btn-custom btn-sm">--%>
-<%--                        <i class="fas fa-edit"></i> Edit--%>
-<%--                    </a>--%>
                     <form action="/project?action=editform" method="post">
                         <input type="hidden" name="projectId" value="<%= project.getProject_id() %>">
-                        <button type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></button>
+                        <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></button>
                     </form>
                     <!-- Delete Project Button -->
-<%--                    <a href="project?action=delete?projectId=<%= project.getProject_id() %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this project?');">--%>
-<%--                        <i class="fas fa-trash"></i> Delete--%>
-<%--                    </a>--%>
                     <form action="/project?action=delete" method="post" onsubmit="return confirm('Are you sure you want to delete this project?');">
                         <input type="hidden" name="projectId" value="<%= project.getProject_id() %>">
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                     </form>
-                </td>
-            </tr>
+                </div>
+            </div>
             <%
                     }
                 }
             %>
-            </tbody>
-        </table>
+        </div>
     </div>
 </section>
 
