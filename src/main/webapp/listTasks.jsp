@@ -80,6 +80,17 @@
         .ressourceBtn {
             font-size: 11px;
         }
+
+        #ressource {
+            display: flex;
+            gap: 4px;
+        }
+
+        #remove-ressource {
+            background: none;
+            border: none;
+            margin-top: 2px;
+        }
     </style>
 </head>
 <body>
@@ -121,8 +132,16 @@
                     <%
                         if (ressources != null) {
                             for (Ressource ressource : ressources) {
+                                // Assuming ressource has a method to get tache_ressource_id
+                                int tacheRessourceId = ressource.getTacheRessourceId(); // You need to add this method in the Ressource class
                     %>
-                    <%= ressource.getName() %> (<%= ressource.getType() %>)<br>
+                    <div id="ressource">
+                        <form action="/task?action=deleteressourcetask" method="post" onsubmit="return confirm('Are you sure you want to remove this resource?');">
+                            <input type="hidden" name="task_ressourceId" value="<%= tacheRessourceId %>">
+                            <button type="submit" id="remove-ressource"><i class="fas fa-trash fa-s" style="color: #ff1100;"></i></button>
+                        </form>
+                        <%= ressource.getName() %> (<%= ressource.getType() %>)<br>
+                    </div>
                     <%
                         }
                     } else {
