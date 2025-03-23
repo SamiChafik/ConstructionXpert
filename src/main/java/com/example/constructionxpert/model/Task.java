@@ -19,6 +19,14 @@ public class Task {
         this.finish_date = finish_date;
     }
 
+    public Task(int task_id, String name, String description, String start_date, String finish_date) {
+        this.task_id = task_id;
+        this.name = name;
+        this.description = description;
+        this.start_date = start_date;
+        this.finish_date = finish_date;
+    }
+
     public int getTask_id() {
         return task_id;
     }
