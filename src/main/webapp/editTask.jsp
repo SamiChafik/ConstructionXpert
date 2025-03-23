@@ -78,7 +78,7 @@
     <div class="form-container">
         <h1>Add Task</h1>
         <form action="task?action=edit" method="post">
-            <input type="hidden" name="tasktId" value="<%= request.getParameter("taskId") %>">
+            <input type="hidden" name="taskId" value="<%= request.getParameter("taskId") %>">
 
             <div class="form-group">
                 <label for="name">Task Name:</label>
