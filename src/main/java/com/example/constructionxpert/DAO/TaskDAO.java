@@ -64,7 +64,7 @@ public class TaskDAO {
 
     public List<Task> getAllTasks() {
         List<Task> tasks = new ArrayList<>();
-        String sql = "SELECT t.*, p.name AS project_name, r.name AS ressource_name, r.type AS ressource_type " +
+        String sql = "SELECT t.*, p.name AS project_name, r.name AS ressource_name, r.type AS ressource_type, tr.tache_ressource_id " +
                 "FROM tache t " +
                 "LEFT JOIN project p ON t.project_id = p.project_id " +
                 "LEFT JOIN tache_ressource tr ON t.tache_id = tr.tache_id " +
@@ -91,6 +91,7 @@ public class TaskDAO {
                 Ressource ressource = new Ressource();
                 ressource.setName(resultSet.getString("ressource_name"));
                 ressource.setType(resultSet.getString("ressource_type"));
+                ressource.setTacheRessourceId(resultSet.getInt("tache_ressource_id")); // Set tache_ressource_id
 
                 // Check if the task already exists in the list
                 Task existingTask = tasks.stream()
@@ -127,6 +128,33 @@ public class TaskDAO {
         return tasks;
     }
 
+    public Task getTaskById(int taskId) {
+        String sql = "SELECT * FROM tache WHERE tache_id = ?";
+        Task task = null;
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, taskId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    task = new Task(
+                            resultSet.getInt("tache_id"),
+                            resultSet.getString("name"),
+                            resultSet.getString("description"),
+                            resultSet.getString("start_date"),
+                            resultSet.getString("finish_date")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return task;
+    }
+
     public boolean deleteTask(int taskId) {
         String sql = "DELETE FROM tache WHERE tache_id = ?";
 
@@ -144,4 +172,20 @@ public class TaskDAO {
         }
     }
 
+    public boolean deleteRessourceTask(int taskRessourceId) {
+        String sql = "DELETE FROM tache_ressource WHERE tache_ressource_id = ?";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, taskRessourceId);
+            int rowsDeleted = statement.executeUpdate();
+            return rowsDeleted > 0;
+
+        } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
