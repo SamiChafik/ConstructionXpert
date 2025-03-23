@@ -57,7 +57,7 @@
         </div>
         <div class="buttons-container">
             <button type="submit" class="btn btn-custom btn-block">Login</button>
-            <button href="accueil.jsp" class="btn btn-custom btn-block">Accueil</button>
+            <a href="accueil.jsp" class="btn btn-custom btn-block">Accueil</a>
         </div>
     </form>
 
