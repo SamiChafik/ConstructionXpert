@@ -146,12 +146,16 @@
     </section>
     <section id="section2">
         <div class="blurry-box">
-            <img src="assets/images/crop-architect-opening-blueprint-2.JPG" alt="Image 1">
-            <h2>Projets</h2>
+            <a href="/project?action=list">
+                <img src="assets/images/crop-architect-opening-blueprint-2.JPG" alt="Image 1">
+                <h2>Projets</h2>
+            </a>
         </div>
         <div class="blurry-box">
-            <img src="assets/images/building-plans-design-2.JPG" alt="Image 2">
-            <h2>Ressources</h2>
+            <a href="/ressource?action=list">
+                <img src="assets/images/building-plans-design-2.JPG" alt="Image 2">
+                <h2>Ressources</h2>
+            </a>
         </div>
     </section>
 </main>
