@@ -1,7 +1,7 @@
 package com.example.constructionxpert.model;
 
 public class Ressource {
-    private int ressource_id, quantity;
+    private int ressource_id, quantity, tache_ressource_id;
     private String name, type, supplier;
 
     public Ressource() {
@@ -60,5 +60,13 @@ public class Ressource {
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
+    }
+
+    public int getTacheRessourceId() {
+        return tache_ressource_id;
+    }
+
+    public void setTacheRessourceId(int tache_ressource_id) {
+        this.tache_ressource_id = tache_ressource_id;
     }
 }
