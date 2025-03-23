@@ -113,7 +113,17 @@ public class TaskServlet extends HttpServlet {
         request.getRequestDispatcher("editTask.jsp").forward(request, response);
     }
 
-    private void updateTask(HttpServletRequest request, HttpServletResponse response) {
+    private void updateTask(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int taskId = Integer.parseInt(request.getParameter("taskId"));
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        String start_date = request.getParameter("start_date");
+        String finish_date = request.getParameter("finish_date");
+
+        Task task = new Task(taskId, name, description, start_date, finish_date);
+        taskDAO.updateTask(task);
+
+        response.sendRedirect("/task?action=list");
     }
 
     private void showResourceToTaskForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
