@@ -3,6 +3,7 @@ package com.example.constructionxpert.controllers;
 import com.example.constructionxpert.DAO.ProjectDAO;
 import com.example.constructionxpert.DAO.RessourceDAO;
 import com.example.constructionxpert.DAO.TaskDAO;
+import com.example.constructionxpert.model.Project;
 import com.example.constructionxpert.model.Ressource;
 import com.example.constructionxpert.model.Task;
 import jakarta.servlet.RequestDispatcher;
@@ -38,6 +39,12 @@ public class TaskServlet extends HttpServlet {
            case "list":
                listTasks(request,response);
                break;
+           case "editform":
+               showEditForm(request, response);
+               break;
+           case "edit":
+               updateTask(request, response);
+               break;
            case "addressourceforn":
                showResourceToTaskForm(request, response);
                break;
@@ -47,11 +54,12 @@ public class TaskServlet extends HttpServlet {
            case "delete":
                deleteTask(request, response);
                break;
+           case "deleteressourcetask":
+               deleteRessoureTask(request, response);
+               break;
 
        }
     }
-
-
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -91,6 +99,23 @@ public class TaskServlet extends HttpServlet {
         request.getRequestDispatcher("listTasks.jsp").forward(request, response);
     }
 
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int taskId = Integer.parseInt(request.getParameter("taskId"));
+        Task task = taskDAO.getTaskById(taskId);
+
+        request.setAttribute("task_id", task.getTask_id());
+        request.setAttribute("name", task.getName());
+        request.setAttribute("description", task.getDescription());
+        request.setAttribute("start_date", task.getStart_date());
+        request.setAttribute("finish_date", task.getFinish_date());
+
+
+        request.getRequestDispatcher("editTask.jsp").forward(request, response);
+    }
+
+    private void updateTask(HttpServletRequest request, HttpServletResponse response) {
+    }
+
     private void showResourceToTaskForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int taskId = Integer.parseInt(request.getParameter("taskId"));
 
@@ -126,4 +151,16 @@ public class TaskServlet extends HttpServlet {
         }
     }
 
+    private void deleteRessoureTask(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int task_ressourceId = Integer.parseInt(request.getParameter("task_ressourceId"));
+
+        TaskDAO taskDAO = new TaskDAO();
+        boolean isDeleted = taskDAO.deleteRessourceTask(task_ressourceId);
+
+        if (isDeleted) {
+            response.sendRedirect("/task?action=list");
+        } else {
+            response.sendRedirect("viewTask?error=delete_failed");
+        }
+    }
 }
