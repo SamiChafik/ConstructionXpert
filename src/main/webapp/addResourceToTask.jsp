@@ -34,8 +34,20 @@
             transition: background-color 0.3s ease;
         }
 
+        .btn-custom:disabled {
+            background-color: #cccccc;
+            color: #666666;
+        }
+
         .btn-custom:hover {
             background-color: #4acf97;
+        }
+
+        .error-message {
+            color: #dc3545; /* Red color for error messages */
+            font-size: 0.875em; /* Smaller font size */
+            margin-top: 5px;
+            display: none; /* Hidden by default */
         }
     </style>
 </head>
@@ -56,7 +68,7 @@
                         if (ressources != null) {
                             for (Ressource ressource : ressources) {
                     %>
-                    <option value="<%= ressource.getRessource_id() %>">
+                    <option value="<%= ressource.getRessource_id() %>" data-quantity="<%= ressource.getQuantity() %>">
                         <%= ressource.getName() %> (<%= ressource.getQuantity() %> available)
                     </option>
                     <%
@@ -68,10 +80,14 @@
 
             <div class="form-group">
                 <label for="resourceQuantity">Quantity to Use:</label>
-                <input type="number" id="resourceQuantity" name="resourceQuantity" class="form-control" required>
+                <input type="number" id="resourceQuantity" name="resourceQuantity" class="form-control" required onchange="validateQuantity()">
+                <!-- Error message div -->
+                <div id="quantityError" class="error-message">
+                    The entered quantity exceeds the available quantity.
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-custom btn-block">Add Resource</button>
+            <button type="submit" id="submitButton" class="btn btn-custom btn-block">Add Resource</button>
         </form>
     </div>
 </div>
@@ -79,5 +95,32 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function validateQuantity() {
+        const resourceSelect = document.getElementById('resourceId');
+        const quantityInput = document.getElementById('resourceQuantity');
+        const submitButton = document.getElementById('submitButton');
+        const errorMessage = document.getElementById('quantityError');
+
+        const selectedResource = resourceSelect.options[resourceSelect.selectedIndex];
+        const availableQuantity = selectedResource.getAttribute('data-quantity');
+        const enteredQuantity = quantityInput.value;
+
+        if (parseInt(enteredQuantity) > parseInt(availableQuantity)) {
+            submitButton.disabled = true;
+            submitButton.classList.remove('btn-custom');
+            submitButton.classList.add('btn-secondary');
+            errorMessage.style.display = 'block';
+        } else {
+            submitButton.disabled = false;
+            submitButton.classList.remove('btn-secondary');
+            submitButton.classList.add('btn-custom');
+            errorMessage.style.display = 'none';
+        }
+    }
+
+    document.getElementById('resourceId').addEventListener('change', validateQuantity);
+</script>
 </body>
 </html>
