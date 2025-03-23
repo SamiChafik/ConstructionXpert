@@ -155,6 +155,25 @@ public class TaskDAO {
         return task;
     }
 
+    public void updateTask(Task task) {
+        String sql = "UPDATE tache SET name = ?, description = ?, start_date = ?, finish_date = ? WHERE tache_id = ?";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, task.getName());
+            statement.setString(2, task.getDescription());
+            statement.setDate(3, Date.valueOf(task.getStart_date()));
+            statement.setDate(4, Date.valueOf(task.getFinish_date()));
+            statement.setInt(5, task.getTask_id());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public boolean deleteTask(int taskId) {
         String sql = "DELETE FROM tache WHERE tache_id = ?";
 
