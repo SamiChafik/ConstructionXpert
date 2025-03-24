@@ -10,7 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background: url('assets/images/7014634.jpg') no-repeat center center fixed;
+            background: url('assets/images/6076665.jpg') no-repeat center center fixed;
             background-size: cover;
             margin: 0;
             padding: 0;
@@ -23,7 +23,7 @@
             backdrop-filter: blur(10px);
             padding: 20px;
             border-radius: 15px;
-            border: 2px solid #5AE4A7;
+            border: 2px solid #d268cc;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 1200px;
@@ -43,7 +43,7 @@
         }
 
         .table thead th {
-            background-color: #5AE4A7;
+            background-color: #d268cc;
             color: #000;
         }
 

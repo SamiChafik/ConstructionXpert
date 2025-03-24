@@ -6,8 +6,8 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <style>
     body {
-      background: url('assets/images/7014634.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: url('assets/images/6076665.jpg') no-repeat center center fixed;
+      /*background-size: cover;*/
     }
 
     .main-content {
@@ -26,14 +26,14 @@
     }
 
     .btn-custom {
-      background-color: #5AE4A7;
+      background-color: #d268cc;
       border: none;
       color: #000;
       transition: background-color 0.3s ease;
     }
 
     .btn-custom:hover {
-      background-color: #4acf97;
+      background-color: #b854b2;
     }
   </style>
 </head>
