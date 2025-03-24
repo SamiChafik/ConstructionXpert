@@ -41,6 +41,14 @@
         .btn-custom:hover {
             background-color: #10d782;
         }
+
+        @media (max-width: 950px) {
+
+            .login-container {
+                max-width: 600px;
+                max-height: 400px;
+            }
+        }
     </style>
 </head>
 <body>
