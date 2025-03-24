@@ -5,12 +5,10 @@
 <%@ page import="com.example.constructionxpert.model.Ressource" %>
 <html>
 <head>
-    <title>View Projects</title>
+    <title>Voir les Projets</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-
         body {
             background: url('assets/images/7014634.jpg') no-repeat center center fixed;
             background-size: cover;
@@ -18,10 +16,7 @@
             padding: 0;
             height: 90vh;
             flex-direction: row;
-            /*align-items: center;*/
-            /*justify-content: center;*/
         }
-
 
         .blurry-box {
             background: rgba(42, 42, 42, 0.4);
@@ -35,9 +30,8 @@
             margin: 20px auto;
         }
 
-        .sectionTable{
+        .sectionTable {
             display: flex;
-            /*align-items: center;*/
             justify-content: center;
             width: 82%;
             margin-left: 250px;
@@ -68,7 +62,6 @@
             background-color: #4acf97;
         }
 
-
         body {
             display: flex;
             flex-direction: column;
@@ -90,15 +83,15 @@
 </section>
 <section class="sectionTable">
     <div class="blurry-box">
-        <h1 class="text-center mb-4">Ressource List</h1>
+        <h1 class="text-center mb-4">Liste des Ressources</h1>
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Type</th>
-                <th>Quantity</th>
-                <th>Supplier</th>
+                <th>Quantité</th>
+                <th>Fournisseur</th>
                 <th>Options</th>
             </tr>
             </thead>
@@ -115,19 +108,11 @@
                 <td><%= ressource.getQuantity() %></td>
                 <td><%= ressource.getSupplier() %></td>
                 <td id="options">
-                    <!-- Edit Project Button -->
-<%--                    <a href="ressource?...=<%= ressource.getRessource_id() %>" class="btn btn-custom btn-sm">--%>
-<%--                        <i class="fas fa-edit"></i> Edit--%>
-<%--                    </a>--%>
                     <form action="/ressource?action=editform" method="post">
                         <input type="hidden" name="ressourceId" value="<%= ressource.getRessource_id() %>">
                         <button type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></button>
                     </form>
-                    <!-- Delete Project Button -->
-                    <%--                    <a href="project?action=delete?projectId=<%= project.getProject_id() %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this project?');">--%>
-                    <%--                        <i class="fas fa-trash"></i> Delete--%>
-                    <%--                    </a>--%>
-                    <form action="/ressource?action=delete" method="post" onsubmit="return confirm('Are you sure you want to delete this ressource?');">
+                    <form action="/ressource?action=delete" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette ressource ?');">
                         <input type="hidden" name="ressourceId" value="<%= ressource.getRessource_id() %>">
                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
@@ -143,7 +128,7 @@
 </section>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4 /dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

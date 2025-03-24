@@ -3,7 +3,7 @@
 <%@ page import="java.util.List" %>
 <html>
 <head>
-    <title>Add Resource to Task</title>
+    <title>Ajouter une Ressource à la Tâche</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
@@ -44,10 +44,10 @@
         }
 
         .error-message {
-            color: #dc3545; /* Red color for error messages */
-            font-size: 0.875em; /* Smaller font size */
+            color: #dc3545;
+            font-size: 0.875em;
             margin-top: 5px;
-            display: none; /* Hidden by default */
+            display: none;
         }
     </style>
 </head>
@@ -55,21 +55,21 @@
 <jsp:include page="header.jsp" />
 <div class="main-content">
     <div class="form-container">
-        <h1>Add Resource to Task</h1>
+        <h1>Ajouter une Ressource à la Tâche</h1>
         <form action="task?action=addressourcetotask" method="post">
             <input type="hidden" name="taskId" value="<%= request.getAttribute("taskId") %>">
 
             <div class="form-group">
-                <label for="resourceId">Select Resource:</label>
+                <label for="resourceId">Sélectionner une Ressource :</label>
                 <select id="resourceId" name="resourceId" class="form-control" required>
-                    <option value="">-- Select a Resource --</option>
+                    <option value="">-- Sélectionner une Ressource --</option>
                     <%
                         List<Ressource> ressources = (List<Ressource>) request.getAttribute("ressources");
                         if (ressources != null) {
                             for (Ressource ressource : ressources) {
                     %>
                     <option value="<%= ressource.getRessource_id() %>" data-quantity="<%= ressource.getQuantity() %>">
-                        <%= ressource.getName() %> (<%= ressource.getQuantity() %> available)
+                        <%= ressource.getName() %> (<%= ressource.getQuantity() %> disponibles)
                     </option>
                     <%
                             }
@@ -79,15 +79,14 @@
             </div>
 
             <div class="form-group">
-                <label for="resourceQuantity">Quantity to Use:</label>
+                <label for="resourceQuantity">Quantité à Utiliser :</label>
                 <input type="number" id="resourceQuantity" name="resourceQuantity" class="form-control" required onchange="validateQuantity()">
-                <!-- Error message div -->
                 <div id="quantityError" class="error-message">
-                    The entered quantity exceeds the available quantity.
+                    La quantité saisie dépasse la quantité disponible.
                 </div>
             </div>
 
-            <button type="submit" id="submitButton" class="btn btn-custom btn-block">Add Resource</button>
+            <button type="submit" id="submitButton" class="btn btn-custom btn-block">Ajouter la Ressource</button>
         </form>
     </div>
 </div>

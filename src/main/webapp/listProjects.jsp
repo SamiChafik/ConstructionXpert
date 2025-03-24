@@ -4,9 +4,8 @@
 <%@ page import="com.example.constructionxpert.model.User" %>
 <html>
 <head>
-    <title>View Projects</title>
+    <title>Voir les Projets</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body {
@@ -40,8 +39,8 @@
 
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Deux colonnes par ligne */
-            gap: 20px; /* Espace entre les boîtes */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
         .project-box {
@@ -102,7 +101,7 @@
 </section>
 <section class="sectionTable">
     <div class="blurry-box">
-        <h1 class="text-center mb-4">Projects List</h1>
+        <h1 class="text-center mb-4">Liste des Projets</h1>
         <div class="project-grid">
             <%
                 List<Project> projects = (List<Project>) request.getAttribute("projects");
@@ -113,22 +112,19 @@
                 <h3><%= project.getName() %></h3>
                 <p><strong>ID:</strong> <%= project.getProject_id() %></p>
                 <p><strong>Description:</strong> <%= project.getDescription() %></p>
-                <p><strong>Start Date:</strong> <%= project.getStart_date() %></p>
-                <p><strong>Finish Date:</strong> <%= project.getFinish_date() %></p>
+                <p><strong>Date de Début:</strong> <%= project.getStart_date() %></p>
+                <p><strong>Date de Fin:</strong> <%= project.getFinish_date() %></p>
                 <p><strong>Budget:</strong> <%= project.getBudget() %></p>
                 <div id="options">
-                    <!-- Add Task Button -->
                     <form action="/task?action=new" method="post">
                         <input type="hidden" name="projectId" value="<%= project.getProject_id() %>">
                         <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-thumbtack"></i></button>
                     </form>
-                    <!-- Edit Project Button -->
                     <form action="/project?action=editform" method="post">
                         <input type="hidden" name="projectId" value="<%= project.getProject_id() %>">
-                        <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></button>
+                        <button type="submit " class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></button>
                     </form>
-                    <!-- Delete Project Button -->
-                    <form action="/project?action=delete" method="post" onsubmit="return confirm('Are you sure you want to delete this project?');">
+                    <form action="/project?action=delete" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?');">
                         <input type="hidden" name="projectId" value="<%= project.getProject_id() %>">
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                     </form>

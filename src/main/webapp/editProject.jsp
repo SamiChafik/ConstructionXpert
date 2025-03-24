@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add Project</title>
+    <title>Ajouter un Projet</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
@@ -40,35 +40,34 @@
 <body>
 <jsp:include page="header.jsp" />
 <div class="main-content">
-    <h1>Add Project</h1>
     <div class="form-container">
+        <h1>Modifier un Projet</h1>
         <form action="project?action=edit" method="post">
             <input type="hidden" name="projectId" value="<%= request.getAttribute("project_id") == null ? "" : request.getAttribute("project_id") %>">
 
             <div class="form-group">
-                <label for="name">Project Name:</label>
+                <label for="name">Nom du Projet :</label>
                 <input type="text" id="name" name="name" class="form-control" value="<%= request.getAttribute("name") == null ? "" : request.getAttribute("name") %>" required>
             </div>
 
             <div class="form-group">
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required>
-                    <%= request.getAttribute("description") == null ? "" : request.getAttribute("description") %>
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" class="form-control" rows="4" required><%= request.getAttribute("description") == null ? "" : request.getAttribute("description") %>
                 </textarea>
             </div>
 
             <div class="form-group">
-                <label for="start_date">Start Date:</label>
+                <label for="start_date">Date de Début :</label>
                 <input type="date" id="start_date" name="start_date" class="form-control" value="<%= request.getAttribute("start_date") == null ? "" : request.getAttribute("start_date") %>" required>
             </div>
 
             <div class="form-group">
-                <label for="finish_date">Finish Date:</label>
+                <label for="finish_date">Date de Fin :</label>
                 <input type="date" id="finish_date" name="finish_date" class="form-control" value="<%= request.getAttribute("finish_date") == null ? "" : request.getAttribute("finish_date") %>" required>
             </div>
 
             <div class="form-group">
-                <label for="budget">Budget:</label>
+                <label for="budget">Budget :</label>
                 <input type="number" id="budget" name="budget" class="form-control" value="<%= request.getAttribute("budget") == null ? "" : request.getAttribute("budget") %>" required>
             </div>
 

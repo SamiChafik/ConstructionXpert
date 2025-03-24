@@ -2,7 +2,7 @@
 <%@ page import="java.util.List" %>
 <html>
 <head>
-    <title>Add Task</title>
+    <title>Ajouter une Tâche</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
@@ -43,7 +43,7 @@
             border: 1px solid #ccc;
             padding: 15px;
             border-radius: 5px;
-            background-color: #fff; /* Solid white background */
+            background-color: #fff;
         }
 
         .form-check {
@@ -66,41 +66,37 @@
             align-items: center;
             margin-bottom: 10px;
         }
-
-        /*.input-check{*/
-        /*    margin: 10px;*/
-        /*}*/
     </style>
 </head>
 <body>
 <jsp:include page="header.jsp" />
 <div class="main-content">
     <div class="form-container">
-        <h1>Add Task</h1>
+        <h1>Ajouter une Tâche</h1>
         <form action="task?action=add" method="post">
             <input type="hidden" name="projectId" value="<%= request.getParameter("projectId") %>">
 
             <div class="form-group">
-                <label for="name">Task Name:</label>
+                <label for="name">Nom de la Tâche :</label>
                 <input type="text" id="name" name="name" class="form-control" required>
             </div>
 
             <div class="form-group">
-                <label for="description">Description:</label>
+                <label for="description">Description :</label>
                 <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
             </div>
 
             <div class="form-group">
-                <label for="start_date">Start Date:</label>
+                <label for="start_date">Date de Début :</label>
                 <input type="date" id="start_date" name="start_date" class="form-control" required>
             </div>
 
             <div class="form-group">
-                <label for="finish_date">Finish Date:</label>
+                <label for="finish_date">Date de Fin :</label>
                 <input type="date" id="finish_date" name="finish_date" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-custom btn-block">Add Task</button>
+            <button type="submit" class="btn btn-custom btn-block">Ajouter la Tâche</button>
         </form>
     </div>
 </div>

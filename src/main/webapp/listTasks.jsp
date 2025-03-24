@@ -1,13 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
 <%@ page import="com.example.constructionxpert.model.Task" %>
 <%@ page import="com.example.constructionxpert.model.Project" %>
 <%@ page import="com.example.constructionxpert.model.Ressource" %>
-<%@ page import="java.util.List" %>
 <html>
 <head>
-    <title>View Tasks</title>
+    <title>Voir les Tâches</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body {
@@ -99,17 +98,17 @@
 </section>
 <section class="sectionTable">
     <div class="blurry-box">
-        <h1 class="text-center mb-4">Tasks List</h1>
+        <h1 class="text-center mb-4">Liste des Tâches</h1>
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Task ID</th>
-                <th>Name</th>
+                <th>ID de Tâche</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>Start Date</th>
-                <th>Finish Date</th>
-                <th>Project Name</th>
-                <th>Resources</th>
+                <th>Date de Début</th>
+                <th>Date de Fin</th>
+                <th>Nom du Projet</th>
+                <th>Ressources</th>
                 <th>Options</th>
             </tr>
             </thead>
@@ -132,11 +131,10 @@
                     <%
                         if (ressources != null) {
                             for (Ressource ressource : ressources) {
-                                // Assuming ressource has a method to get tache_ressource_id
-                                int tacheRessourceId = ressource.getTacheRessourceId(); // You need to add this method in the Ressource class
+                                int tacheRessourceId = ressource.getTacheRessourceId();
                     %>
                     <div id="ressource">
-                        <form action="/task?action=deleteressourcetask" method="post" onsubmit="return confirm('Are you sure you want to remove this resource?');">
+                        <form action="/task?action=deleteressourcetask" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette ressource ?');">
                             <input type="hidden" name="task_ressourceId" value="<%= tacheRessourceId %>">
                             <button type="submit" id="remove-ressource"><i class="fas fa-trash fa-s" style="color: #ff1100;"></i></button>
                         </form>
@@ -146,24 +144,21 @@
                         }
                     } else {
                     %>
-                    No resources assigned
+                    Aucune ressource assignée
                     <%
                         }
                     %>
                 </td>
                 <td id="options">
-
                     <form action="/task?action=addressourceforn" method="post">
                         <input type="hidden" name="taskId" value="<%= task.getTask_id() %>">
                         <button type="submit" class="btn btn-primary ressourceBtn"><i class="fas fa-object-group fa-lg"></i> Ressource</button>
                     </form>
-                    <!-- Edit Task Button -->
                     <form action="/task?action=editform" method="post">
                         <input type="hidden" name="taskId" value="<%= task.getTask_id() %>">
                         <button type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></button>
                     </form>
-                    <!-- Delete Task Button -->
-                    <form action="/task?action=delete" method="post" onsubmit="return confirm('Are you sure you want to delete this task?');">
+                    <form action="/task?action=delete" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?');">
                         <input type="hidden" name="taskId" value="<%= task.getTask_id() %>">
                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>

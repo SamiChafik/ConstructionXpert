@@ -1,11 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add Project</title>
+    <title>Ajouter un Projet</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-
         body {
             background: url('assets/images/7014634.jpg') no-repeat center center fixed;
             background-size: cover;
@@ -41,37 +40,37 @@
 <body>
 <jsp:include page="header.jsp" />
 <div class="main-content">
-    <h1>Add Project</h1>
     <div class="form-container">
+        <h1>Ajouter un Projet</h1>
         <form action="project?action=add" method="post">
             <input type="hidden" name="project_id" value="">
 
             <div class="form-group">
-                <label for="name">Project Name:</label>
+                <label for="name">Nom du Projet :</label>
                 <input type="text" id="name" name="name" class="form-control" required>
             </div>
 
             <div class="form-group">
-                <label for="description">Description:</label>
+                <label for="description">Description :</label>
                 <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
             </div>
 
             <div class="form-group">
-                <label for="start_date">Start Date:</label>
+                <label for="start_date">Date de Début :</label>
                 <input type="date" id="start_date" name="start_date" class="form-control" required>
             </div>
 
             <div class="form-group">
-                <label for="finish_date">Finish Date:</label>
+                <label for="finish_date">Date de Fin :</label>
                 <input type="date" id="finish_date" name="finish_date" class="form-control" required>
             </div>
 
             <div class="form-group">
-                <label for="budget">Budget:</label>
+                <label for="budget">Budget :</label>
                 <input type="number" id="budget" name="budget" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-custom btn-block">Add Project</button>
+            <button type="submit" class="btn btn-custom btn-block">Ajouter le Projet</button>
         </form>
     </div>
 </div>

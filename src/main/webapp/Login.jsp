@@ -39,13 +39,12 @@
         }
 
         .btn-custom:hover {
-            background-color: #4acf97;
+            background-color: #10d782;
         }
     </style>
 </head>
 <body>
 <div class="login-container">
-    <h1 class="text-center">Login</h1>
     <form action="login" method="post">
         <div class="form-group">
             <label for="email">Email:</label>
@@ -56,7 +55,7 @@
             <input type="password" id="password" name="password" class="form-control" required>
         </div>
         <div class="buttons-container">
-            <button type="submit" class="btn btn-custom btn-block">Login</button>
+            <button type="submit" class="btn btn-custom btn-block">Se Connecter</button>
             <a href="accueil.jsp" class="btn btn-custom btn-block">Accueil</a>
         </div>
     </form>

@@ -2,7 +2,7 @@
 <%@ page session="true" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    User user = (User) session.getAttribute("user");
+    User user = (User ) session.getAttribute("user");
     String name = user != null ? user.getName() : "";
 %>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -40,11 +40,6 @@
         align-items: center;
         justify-content: center;
     }
-
-    /*.sidebar-logo-name {*/
-    /*    display: flex;*/
-    /*    flex-direction: column;*/
-    /*}*/
 </style>
 <div class="sidebar">
     <div class="sidebar-logo-name">
@@ -52,16 +47,16 @@
             <img src="assets/logo/ConstructionXpert-removebg-preview-white.PNG" alt="Logo">
         </div>
 
-        <a class="navbar-brand" href="#">
-<%--            Bienvenue, <%= ((User) session.getAttribute("user")).getName() %>--%>
-        </a>
+<%--        <a class="navbar-brand" href="#">--%>
+<%--            Bienvenue, <%= name %>--%>
+<%--        </a>--%>
     </div>
 
-    <a href="/accueil.jsp"><i class="fas fa-home"></i> Home</a>
-    <a href="/project?action=new"><i class="fas fa-plus"></i> Add Project</a>
-    <a href="/project?action=list"><i class="fas fa-list"></i> View Projects</a>
-    <a href="/ressource?action=new"><i class="fas fa-plus"></i> Add Resource</a>
-    <a href="/ressource?action=list"><i class="fas fa-list"></i> View Resources</a>
-    <a href="/task?action=list"><i class="fas fa-list"></i> List of Tasks</a>
-    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <a href="/accueil.jsp"><i class="fas fa-home"></i> Accueil</a>
+    <a href="/project?action=new"><i class="fas fa-plus"></i> Ajouter un Projet</a>
+    <a href="/project?action=list"><i class="fas fa-list"></i> Voir les Projets</a>
+    <a href="/ressource?action=new"><i class="fas fa-plus"></i> Ajouter une Ressource</a>
+    <a href="/ressource?action=list"><i class="fas fa-list"></i> Voir les Ressources</a>
+    <a href="/task?action=list"><i class="fas fa-list"></i> Liste des Tâches</a>
+    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
 </div>
