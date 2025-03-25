@@ -36,6 +36,7 @@ private Table table;
         boolean isValidUser = userDAO.checkLogin(email, password);
 
         if (isValidUser) {
+            request.getSession().setAttribute("isLoggedIn", true);
             response.sendRedirect("addProject.jsp");
         } else {
             response.sendRedirect("Login.jsp?error=invalid_credentials");
