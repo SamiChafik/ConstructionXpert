@@ -103,6 +103,15 @@
             font-size: 24px;
             margin-bottom: 10px;
         }
+
+        /* New footer styles */
+        footer {
+            background-color: #5AE4A7;
+            color: black;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -159,6 +168,11 @@
         </div>
     </section>
 </main>
+
+<!-- Footer Section -->
+<footer>
+    © 2025 ConstructionXpert Services Solution. All Rights Reserved.
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
